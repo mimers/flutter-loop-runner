@@ -47,14 +47,19 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  Timer t;
+
+  @override
+  void dispose() {
+    super.dispose();
+    t.cancel();
+  }
+
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 100), _incrementCounter);
-    Timer(Duration(milliseconds: 200), _incrementCounter);
-    Timer(Duration(milliseconds: 300), _incrementCounter);
-    Timer(Duration(milliseconds: 400), _incrementCounter);
-    Timer(Duration(milliseconds: 500), _incrementCounter);
+    t = Timer.periodic(
+        Duration(milliseconds: 120), (Timer t) => _incrementCounter());
   }
 
   void _incrementCounter() {
